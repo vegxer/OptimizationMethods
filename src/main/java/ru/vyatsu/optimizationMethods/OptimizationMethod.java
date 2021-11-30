@@ -13,7 +13,7 @@ public abstract class OptimizationMethod {
     }
 
     protected boolean validateSplitNumber(int splitNumber) {
-        return splitNumber >= 1;
+        return splitNumber > 1;
     }
 
     protected boolean validateBorders(double start, double end) {
