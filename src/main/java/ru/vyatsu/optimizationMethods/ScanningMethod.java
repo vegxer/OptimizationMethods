@@ -24,7 +24,8 @@ public class ScanningMethod extends OptimizationMethod {
             start = Precision.round(min.x - h, 12);
             end = Precision.round(min.x + h, 12);
             h = (end - start) / splitNumber;
-        } while (Precision.round(end - start, 12) >= eps);
+        } while (Precision.round(h, 12) >= eps);
+        min = findMin(start, end, h);
 
         return min;
     }
