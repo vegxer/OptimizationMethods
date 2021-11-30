@@ -18,16 +18,14 @@ public class ScanningMethod extends OptimizationMethod {
         }
 
         double h = (end - start) / splitNumber;
-        Point2D.Double min;
         while (Precision.round(h, 12) >= eps) {
-            min = findMin(start, end, h);
+            Point2D.Double min = findMin(start, end, h);
             start = Precision.round(min.x - h, 12);
             end = Precision.round(min.x + h, 12);
             h = (end - start) / splitNumber;
         }
-        min = findMin(start, end, h);
 
-        return min;
+        return findMin(start, end, h);
     }
 
     @Override
