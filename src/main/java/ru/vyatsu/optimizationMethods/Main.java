@@ -13,6 +13,8 @@ public class Main {
             try {
                 System.out.println("1 - Метод сканирования");
                 System.out.println("2 - Метод половинного деления");
+                System.out.println("3 - Метод золотого сечения");
+                System.out.println("4 - Метод Фибоначчи");
                 System.out.println("0 - Выход из программы");
                 System.out.print("Ваш выбор: ");
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -20,8 +22,10 @@ public class Main {
                 switch (choice) {
                     case 1 -> method = new ScanningMethod(function);
                     case 2 -> method = new HalfDivisionMethod(function);
+                    case 3 -> method = new GoldenRatioMethod(function);
+                    case 4 -> method = new FibonacciMethod(function);
                     case 0 -> System.exit(0);
-                    default -> throw new IllegalArgumentException("Необходим аргумент из диапазона от 0 до 1");
+                    default -> throw new IllegalArgumentException("Необходим аргумент из диапазона от 0 до 3");
                 }
 
                 System.out.print("Введите начало и конец отрезка: ");

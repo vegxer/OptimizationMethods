@@ -1,13 +1,12 @@
 package ru.vyatsu.optimizationMethods;
 
-import org.apache.commons.math3.util.Precision;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.geom.Point2D;
 import java.util.function.Function;
 
-public class HalfDivisionMethod extends OptimizationMethod {
-    public HalfDivisionMethod(@NotNull Function<Double, Double> function) {
+public class GoldenRatioMethod extends OptimizationMethod {
+    public GoldenRatioMethod(@NotNull Function<Double, Double> function) {
         super(function);
     }
 
@@ -20,20 +19,20 @@ public class HalfDivisionMethod extends OptimizationMethod {
             throw new IllegalArgumentException("Точность вычислений должна быть больше нуля");
         }
 
-        double mid = (start + end) / 2;
-        double left = mid - eps / 2;
-        double right = mid + eps / 2;
+        double t = (1 + Math.sqrt(5)) / 2;
+        double x1 = end - (end - start) / t;
+        double x2 = start + (end - start) / t;
 
-        while (Precision.round(end - start, 12) / 2 > eps) {
-            if (function.apply(left) < function.apply(right)) {
-                end = right;
+        while ((end - start) / 2 > eps) {
+            if (function.apply(x1) > function.apply(x2)) {
+                start = x1;
+                x1 = x2;
+                x2 = end - (x1 - start);
             } else {
-                start = left;
+                end = x2;
+                x2 = x1;
+                x1 = start + end - x2;
             }
-
-            mid = (start + end) / 2;
-            left = mid - eps / 2;
-            right = mid + eps / 2;
         }
 
         return new Point2D.Double((start + end) / 2, function.apply((start + end) / 2));
