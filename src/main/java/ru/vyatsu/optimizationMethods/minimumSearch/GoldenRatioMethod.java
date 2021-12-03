@@ -1,4 +1,4 @@
-package ru.vyatsu.optimizationMethods;
+package ru.vyatsu.optimizationMethods.minimumSearch;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,12 +12,8 @@ public class GoldenRatioMethod extends OptimizationMethod {
 
     @Override
     public Point2D.Double findMin(double start, double end, double eps) {
-        if (!validateBorders(start, end)) {
-            throw new IllegalArgumentException("Начальная точка должна быть не больше конечной");
-        }
-        if (!validateAccuracy(eps)) {
-            throw new IllegalArgumentException("Точность вычислений должна быть больше нуля");
-        }
+        validateBorders(start, end);
+        validateAccuracy(eps);
 
         double t = (1 + Math.sqrt(5)) / 2;
         double x1 = end - (end - start) / t;
